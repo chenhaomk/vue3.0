@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import login from '@/views/pages/login.vue'
+import dashboard from '@/views/dashboard.vue'
+import icon from '@/views/pages/icon.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +10,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          meta: {
+            title: '系统首页',
+            noAuth: true
+          },
+          component: dashboard
+        },
+        {
+          path: '/icon',
+          name: 'icon',
+          meta: {
+            title: '图标',
+            permiss: '5'
+          },
+          component: icon
+        }
+      ]
     },
     {
       path: '/about',
