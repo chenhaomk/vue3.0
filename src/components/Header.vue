@@ -56,6 +56,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { useSidebarStore } from '../stores/sidebar'
 import imgurl from '../assets/img/img.jpg';
 
 const router = useRouter();
@@ -64,13 +65,13 @@ const router = useRouter();
 const username: string | null = localStorage.getItem('vuems_name');
 const message: number = 2;
 
+const sidebar = useSidebarStore()
+
 const collapseChage = () => {
-
+    sidebar.handleCollapse()
 }
 
-const sidebar = {
-    collapse: false
-}
+
 
 
 const setFullScreen = () => {
