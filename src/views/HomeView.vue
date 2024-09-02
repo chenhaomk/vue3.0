@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 import vHeader from '@/components/Header.vue';
 import vSiderBar from '@/components/SideBar.vue';
 import { useSidebarStore } from '@/stores/sidebar';
@@ -8,13 +7,15 @@ import vTabs from '@/components/Tabs.vue';
 
 const sidebar = useSidebarStore();
 const tabs = useTabsStore();
+
+
 </script>
 
 <template>
   <div class="wrapper">
     <v-header />
     <v-siderBar />
-    <div class="content-box">
+    <div class="content-box" :class="{ 'content-collapse': sidebar.collapse }">
       <v-tabs></v-tabs>
       <div class="content">
         <router-view v-slot="{ Component }">
@@ -30,6 +31,11 @@ const tabs = useTabsStore();
 </template>
 
 <style scoped>
+.wrapper {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .content-box {
   position: absolute;
   left: 250px;
@@ -41,5 +47,21 @@ const tabs = useTabsStore();
   transition: left 0.3s ease-in-out;
   background: #eef0fc;
   overflow: hidden;
+}
+
+.content {
+  width: auto;
+  height: 100%;
+  padding: 20px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+.content::-webkit-scrollbar {
+  width: 0;
+}
+
+.content-collapse {
+  left: 65px;
 }
 </style>
